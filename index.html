@@ -2,8 +2,12 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, initial-scale=1.0, maximum-scale=5.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Евгений & Алина | 28.08.2026</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2032%2032%27%3E%3Ccircle%20cx%3D%2712%27%20cy%3D%2717%27%20r%3D%278%27%20fill%3D%27none%27%20stroke%3D%27%234a90e2%27%20stroke-width%3D%272.5%27%2F%3E%3Ccircle%20cx%3D%2720%27%20cy%3D%2717%27%20r%3D%278%27%20fill%3D%27none%27%20stroke%3D%27%234a90e2%27%20stroke-width%3D%272.5%27%2F%3E%3Cpolygon%20points%3D%2712%2C6%2014%2C8.5%2012%2C11%2010%2C8.5%27%20fill%3D%27%23a8cdf0%27%20stroke%3D%27%234a90e2%27%20stroke-width%3D%270.4%27%2F%3E%3C%2Fsvg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2032%2032%27%3E%3Ccircle%20cx%3D%2712%27%20cy%3D%2717%27%20r%3D%278%27%20fill%3D%27none%27%20stroke%3D%27%234a90e2%27%20stroke-width%3D%272.5%27%2F%3E%3Ccircle%20cx%3D%2720%27%20cy%3D%2717%27%20r%3D%278%27%20fill%3D%27none%27%20stroke%3D%27%234a90e2%27%20stroke-width%3D%272.5%27%2F%3E%3Cpolygon%20points%3D%2712%2C6%2014%2C8.5%2012%2C11%2010%2C8.5%27%20fill%3D%27%23a8cdf0%27%20stroke%3D%27%234a90e2%27%20stroke-width%3D%270.4%27%2F%3E%3C%2Fsvg%3E">
+<link rel="mask-icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2032%2032%27%3E%3Ccircle%20cx%3D%2712%27%20cy%3D%2717%27%20r%3D%278%27%20fill%3D%27none%27%20stroke%3D%27%234a90e2%27%20stroke-width%3D%272.5%27%2F%3E%3Ccircle%20cx%3D%2720%27%20cy%3D%2717%27%20r%3D%278%27%20fill%3D%27none%27%20stroke%3D%27%234a90e2%27%20stroke-width%3D%272.5%27%2F%3E%3Cpolygon%20points%3D%2712%2C6%2014%2C8.5%2012%2C11%2010%2C8.5%27%20fill%3D%27%234a90e2%27%20stroke-width%3D%270.4%27%2F%3E%3C%2Fsvg%3E" color="#4a90e2">
+<meta name="theme-color" content="#eaf4fc">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -763,7 +767,7 @@ body:not(.is-loaded) { overflow: hidden; }
   border-radius: 16px;
   background: rgba(255,255,255,0.75);
   font-family: 'Manrope', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   color: var(--text);
   outline: none;
   transition: border-color .25s ease, box-shadow .25s ease, background .25s ease;
@@ -783,6 +787,25 @@ body:not(.is-loaded) { overflow: hidden; }
   box-shadow: 0 0 0 4px rgba(74,144,226,0.12);
 }
 .form-group textarea { min-height: 90px; resize: vertical; }
+
+.form-extra {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows .45s var(--ease), opacity .35s ease, margin .45s var(--ease);
+  margin-top: 0;
+}
+.form-extra.is-visible {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-top: 16px;
+}
+.form-extra__inner {
+  overflow: hidden;
+  min-height: 0;
+}
+.form-extra__inner > .form-group + .form-group { margin-top: 16px; }
+
 .btn-submit {
   position: relative;
   width: 100%;
@@ -976,128 +999,192 @@ body:not(.is-loaded) { overflow: hidden; }
 .send-sheet__backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(20, 50, 90, 0.32);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(20, 50, 90, 0.36);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  transition: opacity .35s ease;
 }
+.send-sheet.show .send-sheet__backdrop { opacity: 1; }
 .send-sheet__panel {
   position: absolute;
   left: 50%;
   bottom: 24px;
-  transform: translateX(-50%) translateY(20px);
-  width: min(calc(100% - 24px), 520px);
-  background: rgba(255,255,255,0.94);
-  border: 1px solid rgba(255,255,255,0.7);
-  box-shadow: 0 24px 70px rgba(40, 90, 150, 0.22);
+  transform: translateX(-50%) translateY(calc(100% + 40px));
+  width: min(calc(100% - 24px), 480px);
+  background: var(--surface-solid);
+  border: 1px solid rgba(255,255,255,0.8);
+  box-shadow:
+    0 24px 70px rgba(40, 90, 150, 0.22),
+    0 0 0 1px rgba(120,170,220,0.08);
   border-radius: 28px;
-  padding: 22px;
-  transition: transform .25s ease;
+  padding: 24px 20px 20px;
+  transition: transform .5s cubic-bezier(0.32, 1.2, 0.4, 1);
 }
 .send-sheet.show .send-sheet__panel { transform: translateX(-50%) translateY(0); }
 .send-sheet__handle {
-  width: 42px;
+  width: 36px;
   height: 4px;
   border-radius: 999px;
-  background: rgba(74,144,226,.25);
-  margin: 0 auto 16px;
+  background: rgba(74,144,226,.2);
+  margin: 0 auto 18px;
+  transition: background .3s ease;
 }
+.send-sheet__handle:hover { background: rgba(74,144,226,.35); }
 .send-sheet__title {
   text-align: center;
   font-family: 'Cormorant Garamond', serif;
-  font-size: 34px;
+  font-size: 32px;
   font-style: italic;
-  line-height: 1;
-  margin-bottom: 8px;
+  line-height: 1.15;
+  margin-bottom: 4px;
+  color: var(--text);
 }
 .send-sheet__text {
   text-align: center;
-  font-size: 14px;
-  line-height: 1.7;
+  font-size: 13px;
+  line-height: 1.6;
   color: var(--text-soft);
-  max-width: 360px;
-  margin: 0 auto 18px;
+  margin: 0 auto 20px;
+  font-weight: 400;
 }
 .send-sheet__grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
 }
 .send-option {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  min-height: 58px;
-  padding: 14px 12px;
+  gap: 13px;
+  padding: 14px 14px;
   border-radius: 18px;
   border: 1px solid var(--line);
-  background: rgba(255,255,255,0.72);
+  background: rgba(255,255,255,0.7);
   color: var(--text);
   text-decoration: none;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: .02em;
+  cursor: pointer;
+  transition:
+    transform .2s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background .2s ease,
+    border-color .2s ease,
+    box-shadow .25s ease;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  overflow: hidden;
+}
+.send-option::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgba(74,144,226,.1) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity .35s ease;
+  pointer-events: none;
+}
+.send-option:hover::after { opacity: 1; }
+.send-option:hover {
+  background: var(--surface-solid);
+  border-color: rgba(74,144,226,0.3);
+  box-shadow: 0 4px 16px rgba(74,144,226,0.1);
+  transform: translateY(-1px) scale(1.01);
+}
+.send-option:active {
+  transform: translateY(0) scale(0.98);
+  transition-duration: .08s;
 }
 .send-option__icon {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(74,144,226,.34);
+  background: rgba(74,144,226,0.08);
   color: var(--gold);
-  font-size: 14px;
-  line-height: 1;
-  flex: 0 0 30px;
-  background: rgba(255,255,255,0.6);
-  transition: background .2s ease, border-color .2s ease;
-}
-.send-option__icon svg {
-  width: 15px;
-  height: 15px;
-  display: block;
-}
-.send-option {
-  cursor: pointer;
-  transition: transform .18s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
-}
-.send-option:hover {
-  background: rgba(255,255,255,0.95);
-  border-color: rgba(74,144,226,0.45);
-  box-shadow: 0 6px 18px rgba(74,144,226,0.12);
-  transform: translateY(-1px);
-}
-.send-option:active {
-  transform: translateY(0);
+  flex: 0 0 38px;
+  transition: background .25s ease, transform .25s ease;
 }
 .send-option:hover .send-option__icon {
-  background: rgba(255,255,255,0.95);
-  border-color: var(--gold);
+  background: rgba(74,144,226,0.14);
+  transform: scale(1.05);
+}
+.send-option__icon svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+.send-option__info { flex: 1; min-width: 0; }
+.send-option__label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+.send-option__hint {
+  display: block;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--text-soft);
+  margin-top: 1px;
+  font-weight: 400;
+}
+.send-option__arrow {
+  flex: 0 0 18px;
+  color: rgba(74,144,226,0.3);
+  transition: transform .25s ease, color .25s ease;
+}
+.send-option:hover .send-option__arrow {
+  color: var(--gold);
+  transform: translateX(2px);
+}
+.send-option__arrow svg {
+  width: 16px;
+  height: 16px;
+  display: block;
 }
 .send-option--wide { grid-column: 1 / -1; }
 .send-sheet__close {
   width: 100%;
-  margin-top: 12px;
-  padding: 14px 16px;
+  margin-top: 10px;
+  padding: 14px;
   border-radius: 16px;
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,0.7);
+  border: none;
+  background: rgba(120,170,220,0.08);
   color: var(--text-soft);
   font-size: 12px;
+  font-weight: 500;
   letter-spacing: .18em;
   text-transform: uppercase;
+  cursor: pointer;
+  transition: background .2s ease, color .2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.send-sheet__close:hover {
+  background: rgba(120,170,220,0.16);
+  color: var(--text);
+}
+.send-sheet__close:active {
+  background: rgba(120,170,220,0.22);
+  transform: scale(0.97);
+  transition-duration: .08s;
 }
 @media (max-width: 640px) {
   .send-sheet__panel {
     width: calc(100% - 16px);
     bottom: 8px;
     border-radius: 24px;
-    padding: 18px;
+    padding: 20px 16px 16px;
   }
-  .send-sheet__title { font-size: 30px; }
+  .send-sheet__title { font-size: 28px; }
   .send-sheet__grid { gap: 8px; }
-  .send-option { min-height: 54px; font-size: 12px; }
+  .send-option { padding: 12px 12px; border-radius: 16px; gap: 11px; }
+  .send-option__icon { width: 34px; height: 34px; flex: 0 0 34px; border-radius: 10px; }
+  .send-option__icon svg { width: 16px; height: 16px; }
+  .send-option__label { font-size: 13px; }
+  .send-option__hint { font-size: 10px; }
 }
 
 
@@ -1176,10 +1263,11 @@ body:not(.is-loaded) { overflow: hidden; }
         <div class="divider"><i></i></div>
       </div>
       <div class="schedule-grid schedule-grid--single">
+
         <div class="schedule-item card reveal-child">
           <div class="schedule-time">
             <span class="schedule-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10l-2 7a4 4 0 0 1-6 0L7 3z"/><line x1="12" y1="10" x2="12" y2="21"/><line x1="9" y1="21" x2="15" y1="21"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10l-2 7a4 4 0 0 1-6 0L7 3z"/><line x1="12" y1="10" x2="12" y2="21"/><line x1="9" y1="21" x2="15" y2="21"/></svg>
             </span>
             18:30
           </div>
@@ -1259,19 +1347,27 @@ body:not(.is-loaded) { overflow: hidden; }
                 <option value="no">К сожалению, не сможем</option>
               </select>
             </div>
-            <div class="form-group">
-              <label>Количество гостей</label>
-              <input type="number" id="rsvp-guests" min="1" max="10" value="2" required>
+
+            <div class="form-extra" id="form-extra-yes" aria-hidden="true">
+              <div class="form-extra__inner">
+                <div class="form-group form-group--first">
+                  <label>Сколько вас будет?</label>
+                  <input type="number" id="rsvp-guests" min="1" max="10" value="2">
+                </div>
+                <div class="form-group">
+                  <label>Предпочтения в еде / аллергия</label>
+                  <textarea id="rsvp-food" placeholder="Вегетарианец, аллергия на орехи..."></textarea>
+                </div>
+                <div class="form-group">
+                  <label>Предпочтения по алкоголю</label>
+                  <input type="text" id="rsvp-drinks" placeholder="Вино, коньяк, не пью...">
+                </div>
+              </div>
             </div>
-            <div class="form-group">
-              <label>Предпочтения в еде / аллергия</label>
-              <textarea id="rsvp-food" placeholder="Вегетарианец, аллергия на орехи..."></textarea>
-            </div>
-            <div class="form-group">
-              <label>Предпочтения по алкоголю</label>
-              <input type="text" id="rsvp-drinks" placeholder="Вино, коньяк, не пью...">
-            </div>
-<button type="submit" class="btn-submit" id="btn-submit">Отправить ответ</button>
+
+            <div class="form-extra" id="form-extra-no" aria-hidden="true"></div>
+
+            <button type="submit" class="btn-submit" id="btn-submit">Отправить ответ</button>
           </form>
         </div>
       </div>
@@ -1290,38 +1386,48 @@ body:not(.is-loaded) { overflow: hidden; }
     <div class="send-sheet__backdrop" onclick="closeSendSheet()"></div>
     <div class="send-sheet__panel" role="dialog" aria-modal="true" aria-labelledby="send-sheet-title">
       <div class="send-sheet__handle"></div>
-      <div class="send-sheet__title" id="send-sheet-title">Куда отправить?</div>
-      <div class="send-sheet__text">Выберите удобный способ отправки ответа.</div>
+      <div class="send-sheet__title" id="send-sheet-title">Отправить ответ</div>
+      <div class="send-sheet__text">Выберите способ — мы получим ваше сообщение</div>
       <div class="send-sheet__grid">
-        <a class="send-option" id="send-whatsapp" href="#" target="_blank" rel="noopener">
-          <span class="send-option__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-          </span>
-          <span>WhatsApp</span>
-        </a>
         <a class="send-option" id="send-sms" href="#">
           <span class="send-option__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="2" width="18" height="16" rx="3"/><path d="M3 8h18"/><path d="M8 14h3"/><path d="M13 14h3"/></svg>
           </span>
-          <span>SMS</span>
+          <span class="send-option__info">
+            <span class="send-option__label">SMS</span>
+            <span class="send-option__hint">Обычное сообщение на телефон</span>
+          </span>
+          <span class="send-option__arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-4 4"/></svg></span>
         </a>
         <a class="send-option" id="send-telegram" href="#" target="_blank" rel="noopener">
           <span class="send-option__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
           </span>
-          <span>Telegram</span>
+          <span class="send-option__info">
+            <span class="send-option__label">Telegram</span>
+            <span class="send-option__hint">@alinakuteneva</span>
+          </span>
+          <span class="send-option__arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-4 4"/></svg></span>
         </a>
         <a class="send-option" id="send-max" href="#" target="_blank" rel="noopener">
           <span class="send-option__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9 6 9-6"/><rect x="3" y="5" width="18" height="14" rx="2"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           </span>
-          <span>Max</span>
+          <span class="send-option__info">
+            <span class="send-option__label">Max</span>
+            <span class="send-option__hint">Скопировать и вставить вручную</span>
+          </span>
+          <span class="send-option__arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-4 4"/></svg></span>
         </a>
         <a class="send-option send-option--wide" id="send-email" href="#">
           <span class="send-option__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg>
           </span>
-          <span>На почту</span>
+          <span class="send-option__info">
+            <span class="send-option__label">На почту</span>
+            <span class="send-option__hint">Отправить письмо с ответом</span>
+          </span>
+          <span class="send-option__arrow"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4l4 4-4 4"/></svg></span>
         </a>
       </div>
       <button type="button" class="send-sheet__close" onclick="closeSendSheet()">Закрыть</button>
@@ -1332,8 +1438,8 @@ body:not(.is-loaded) { overflow: hidden; }
 </div>
 <script>
 const WEDDING_DATE = new Date('2026-08-28T16:20:00+03:00');
-const PHONE_RAW = '+7901711949';
-const PHONE_DIGITS = '7901711949';
+const PHONE_RAW = '+79021711949';
+const TELEGRAM_USERNAME = 'alinakuteneva';
 const EMAIL = 'pischulin_evgeny@mail.ru';
 let pendingMessage = '';
 
@@ -1449,7 +1555,7 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 
 (function setupMagnetic() {
   if (reduceMotion) return;
-  const targets = document.querySelectorAll('.btn-submit, .send-option');
+  const targets = document.querySelectorAll('.btn-submit');
   targets.forEach(el => {
     el.addEventListener('mousemove', (e) => {
       const r = el.getBoundingClientRect();
@@ -1459,6 +1565,16 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
     });
     el.addEventListener('mouseleave', () => {
       el.style.transform = '';
+    });
+  });
+  const opts = document.querySelectorAll('.send-option');
+  opts.forEach(el => {
+    el.addEventListener('mousemove', (e) => {
+      const r = el.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width * 100).toFixed(1);
+      const y = ((e.clientY - r.top) / r.height * 100).toFixed(1);
+      el.style.setProperty('--mx', x + '%');
+      el.style.setProperty('--my', y + '%');
     });
   });
 })();
@@ -1503,55 +1619,176 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 
 function closeSendSheet() {
   const sheet = document.getElementById('send-sheet');
+  if (!sheet) return;
   sheet.classList.remove('show');
   sheet.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
 }
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' || e.keyCode === 27) {
+    const sheet = document.getElementById('send-sheet');
+    if (sheet && sheet.classList.contains('show')) closeSendSheet();
+  }
+});
+
+(function setupConditionalForm() {
+  const attend = document.getElementById('rsvp-attend');
+  const yesBlock = document.getElementById('form-extra-yes');
+  const noBlock = document.getElementById('form-extra-no');
+  const guests = document.getElementById('rsvp-guests');
+  if (!attend || !yesBlock || !noBlock) return;
+
+  function updateFormState() {
+    const v = attend.value;
+    if (v === 'yes') {
+      yesBlock.classList.add('is-visible');
+      yesBlock.setAttribute('aria-hidden', 'false');
+      noBlock.classList.remove('is-visible');
+      noBlock.setAttribute('aria-hidden', 'true');
+      if (guests) guests.setAttribute('required', '');
+    } else if (v === 'no') {
+      noBlock.classList.add('is-visible');
+      noBlock.setAttribute('aria-hidden', 'false');
+      yesBlock.classList.remove('is-visible');
+      yesBlock.setAttribute('aria-hidden', 'true');
+      if (guests) guests.removeAttribute('required');
+    } else {
+      yesBlock.classList.remove('is-visible');
+      yesBlock.setAttribute('aria-hidden', 'true');
+      noBlock.classList.remove('is-visible');
+      noBlock.setAttribute('aria-hidden', 'true');
+      if (guests) guests.removeAttribute('required');
+    }
+  }
+
+  attend.addEventListener('change', updateFormState);
+  attend.addEventListener('input', updateFormState);
+  updateFormState();
+})();
 
 function openSendSheet() {
   const sheet = document.getElementById('send-sheet');
+  if (!sheet) return;
   const encoded = encodeURIComponent(pendingMessage);
-  const firstName = pendingMessage.split('\n')[1] || '';
-  document.getElementById('send-whatsapp').href = 'https://wa.me/' + PHONE_DIGITS + '?text=' + encoded;
-  document.getElementById('send-sms').href = 'sms:' + PHONE_RAW + '?body=' + encoded;
-  document.getElementById('send-telegram').href = 'https://t.me/+' + PHONE_DIGITS;
-  document.getElementById('send-max').href = 'https://max.ru/+' + PHONE_DIGITS;
-  document.getElementById('send-email').href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('RSVP: ' + firstName.replace('Имена: ', '')) + '&body=' + encoded;
-  const copyAndHint = async function(e) {
-    e.preventDefault();
-    try {
-      await navigator.clipboard.writeText(pendingMessage + '\nТелефон: ' + PHONE_RAW);
-      showToast('Текст скопирован — вставьте его в чат после открытия');
-    } catch (err) {
-      showToast('Откроется мессенджер — вставьте сообщение в чат');
-    }
-  };
-  document.getElementById('send-telegram').onclick = copyAndHint;
-  document.getElementById('send-max').onclick = copyAndHint;
+  const namesEl = document.getElementById('rsvp-names');
+  const subjectName = (namesEl && namesEl.value ? namesEl.value : '').trim();
+  const subjectText = subjectName ? 'RSVP: ' + subjectName : 'Ответ на свадебное приглашение';
+  const emailBody = pendingMessage;
+
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const smsSep = isIOS ? '&' : '?';
+  document.getElementById('send-sms').href = 'sms:' + PHONE_RAW + smsSep + 'body=' + encoded;
+
+  document.getElementById('send-telegram').href = 'https://t.me/' + TELEGRAM_USERNAME + '?text=' + encoded;
+
+  document.getElementById('send-max').href = 'https://max.ru/u/f9LHodD0cOLrAgg957HEX6dT793D8SaPq79EWIXvb7H-xGMK2oFfW7G2Rcw';
+
+  document.getElementById('send-email').href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subjectText) + '&body=' + encodeURIComponent(emailBody);
+
   sheet.classList.add('show');
   sheet.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
 }
+
+function copyToClipboard(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    return navigator.clipboard.writeText(text);
+  }
+  return new Promise(function(resolve, reject) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '-200px';
+    ta.style.left = '0';
+    ta.style.width = '10px';
+    ta.style.height = '10px';
+    ta.style.padding = '0';
+    ta.style.border = 'none';
+    ta.style.outline = 'none';
+    ta.style.boxShadow = 'none';
+    ta.style.background = 'transparent';
+    document.body.appendChild(ta);
+    setTimeout(function() {
+      ta.focus();
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      if (ok) resolve(); else reject(new Error('copy failed'));
+    }, 1);
+  });
+}
+
+function copyForManualPaste() {
+  showToast('Сообщение скопировано — вставьте его вручную в чат');
+  copyToClipboard(pendingMessage)
+    .catch(function() {
+      showToast('Не удалось скопировать — введите вручную');
+    });
+}
+
+(function attachCopyHandlersOnce() {
+  const mx = document.getElementById('send-max');
+  if (mx) mx.addEventListener('click', copyForManualPaste);
+})();
 
 function handleRsvp(e) {
   e.preventDefault();
-  const btn = document.getElementById('btn-submit');
-  btn.disabled = true;
+  if (document.activeElement && document.activeElement.blur) {
+    try { document.activeElement.blur(); } catch (err) {}
+  }
 
   const names = document.getElementById('rsvp-names').value.trim();
   const attend = document.getElementById('rsvp-attend').value;
-  const guests = parseInt(document.getElementById('rsvp-guests').value, 10) || 1;
-  const food = document.getElementById('rsvp-food').value.trim();
-  const drinks = document.getElementById('rsvp-drinks').value.trim();
 
-  pendingMessage =
-    'RSVP\n' +
-    'Имена: ' + names + '\n' +
-    'Присутствие: ' + (attend === 'yes' ? 'Да' : 'Нет') + '\n' +
-    'Количество гостей: ' + guests + '\n' +
-    'Еда/аллергия: ' + (food || '—') + '\n' +
-    'Алкоголь: ' + (drinks || '—');
+  if (!names) {
+    document.getElementById('rsvp-names').focus();
+    document.getElementById('rsvp-names').style.borderColor = '#e74c3c';
+    setTimeout(() => {
+      document.getElementById('rsvp-names').style.borderColor = '';
+    }, 2000);
+    return false;
+  }
 
+  if (!attend) {
+    document.getElementById('rsvp-attend').focus();
+    document.getElementById('rsvp-attend').style.borderColor = '#e74c3c';
+    setTimeout(() => {
+      document.getElementById('rsvp-attend').style.borderColor = '';
+    }, 2000);
+    return false;
+  }
+
+  const btn = document.getElementById('btn-submit');
+  btn.disabled = true;
+  btn.textContent = 'Формируем…';
+
+  const isYes = attend === 'yes';
+  const attendText = isYes ? 'Обязательно будем! 🎉' : 'К сожалению, не сможем 😔';
+
+  let msg = '💌 Ответ на приглашение\n' +
+    '───────────\n' +
+    '👫 ' + names + '\n' +
+    '✅ ' + attendText;
+
+  if (isYes) {
+    const guests = parseInt(document.getElementById('rsvp-guests').value, 10) || 1;
+    const food = document.getElementById('rsvp-food').value.trim();
+    const drinks = document.getElementById('rsvp-drinks').value.trim();
+    msg += '\n👥 Нас будет: ' + guests;
+    if (food) msg += '\n🍽 Особенности питания: ' + food;
+    if (drinks) msg += '\n🍷 Предпочтения: ' + drinks;
+  }
+
+  msg += '\n───────────\n' +
+    'Свадьба Евгения и Алины • 28.08.2026';
+
+  pendingMessage = msg;
   openSendSheet();
   btn.disabled = false;
+  btn.textContent = 'Отправить ответ';
   return false;
 }
 </script>
